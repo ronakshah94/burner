@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid2';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 const CDBurningAnimation = ({songs}) => {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -26,47 +30,31 @@ const CDBurningAnimation = ({songs}) => {
   };
 
   return (
-    <div className="">
-      {/* Button */}
-      <button
+    <Container maxWidth="sm">
+      <Typography variant="h1" gutterBottom>
+          Build playlists!
+        </Typography>
+      <Grid container direction={'column'} alignItems={'center'}>
+      <Button variant="outlined"
         onClick={startAnimation}
         disabled={isAnimating}
-        className={`absolute top-4 left-4 px-6 py-3 rounded-lg text-white font-bold transition-all ${
-          isAnimating ? 'bg-gray-500' : 'bg-blue-600 hover:bg-blue-700'
-        }`}
       >
         {isAnimating ? 'Burning...' : 'Burn CD'}
-      </button>
-
+      </Button>
       {/* Fullscreen Animation */}
       {isAnimating && (
-        <div className="fixed inset-0 bg-black flex items-center justify-center">
           <div className="text-center">
-
             {/* Burning Progress */}
-            <div className="space-y-4 mt-8">
               <div className="text-white text-xl font-semibold">
                 Burning Track: {songs[currentSong].title}
               </div>
-              
-              {/* Progress Bar */}
-              <div className="w-96 bg-gray-700 rounded-full h-4 overflow-hidden">
-                <div 
-                  className="h-full bg-orange-500 transition-all duration-1000"
-                  style={{
-                    width: `${((currentSong + 1) / songs.length) * 100}%`
-                  }}
-                />
-              </div>
-              
               <div className="text-gray-400">
                 {currentSong + 1} of {songs.length} tracks
               </div>
             </div>
-          </div>
-        </div>
       )}
-    </div>
+      </Grid>
+      </Container>
   );
 };
 
